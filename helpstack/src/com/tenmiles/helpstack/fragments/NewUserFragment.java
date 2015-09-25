@@ -171,7 +171,7 @@ public class NewUserFragment extends HSFragmentParent {
 				return false;
 			}
 
-            getHelpStackActivity().setSupportProgressBarIndeterminateVisibility(true);
+            getHelpStackActivity().setProgressBarIndeterminateVisibility(true);
 
 			gearSource.checkForUserDetailsValidity("NEW_USER", getFirstName(), getLastName(),
                     getEmailAdddress(), new OnFetchedSuccessListener() {
@@ -185,7 +185,7 @@ public class NewUserFragment extends HSFragmentParent {
 
                                         @Override
                                         public void onSuccess(HSUser udpatedUserDetail, HSTicket ticket) {
-                                            getHelpStackActivity().setSupportProgressBarIndeterminateVisibility(false);
+                                            getHelpStackActivity().setProgressBarIndeterminateVisibility(false);
                                             sendSuccessSignal(ticket);
                                             gearSource.clearTicketDraft();
                                             Toast.makeText(getActivity(), getResources().getString(R.string.hs_issue_created_raised), Toast.LENGTH_LONG).show();
@@ -196,7 +196,7 @@ public class NewUserFragment extends HSFragmentParent {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
                                             HSUtils.showAlertDialog(getActivity(), getResources().getString(R.string.hs_error_reporting_issue), getResources().getString(R.string.hs_error_check_network_connection));
-                                            getHelpStackActivity().setSupportProgressBarIndeterminateVisibility(false);
+                                            getHelpStackActivity().setProgressBarIndeterminateVisibility(false);
                                         }
                                     });
                         }
@@ -204,7 +204,7 @@ public class NewUserFragment extends HSFragmentParent {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            getHelpStackActivity().setSupportProgressBarIndeterminateVisibility(false);
+                            getHelpStackActivity().setProgressBarIndeterminateVisibility(false);
                         }
                     });
 

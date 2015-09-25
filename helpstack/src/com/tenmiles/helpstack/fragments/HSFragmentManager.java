@@ -22,8 +22,8 @@
 
 package com.tenmiles.helpstack.fragments;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 
 import com.tenmiles.helpstack.activities.HSActivityParent;
 import com.tenmiles.helpstack.model.HSKBItem;
@@ -55,7 +55,7 @@ public class HSFragmentManager {
 	}
 	
 	public static HSFragmentParent getFragmentInActivity(HSActivityParent activity, String tag) {
-		FragmentManager fragMgr = activity.getSupportFragmentManager();
+		FragmentManager fragMgr = activity.getFragmentManager();
 		return (HSFragmentParent) fragMgr.findFragmentByTag(tag);
 	}
 	
@@ -78,14 +78,14 @@ public class HSFragmentManager {
 	}
 
 	public static void putFragmentInActivity(HSActivityParent activity, int resid, HSFragmentParent frag, String tag) {
-		FragmentManager fragMgr = activity.getSupportFragmentManager();
+		FragmentManager fragMgr = activity.getFragmentManager();
 		FragmentTransaction xact = fragMgr.beginTransaction();
 		xact.replace(resid, frag, tag);
 		xact.commit();	
 	}
 	
 	public static void putFragmentBackStackInActivity(HSActivityParent activity, int resid, HSFragmentParent frag, String tag) {
-		FragmentManager fragMgr = activity.getSupportFragmentManager();
+		FragmentManager fragMgr = activity.getFragmentManager();
 		FragmentTransaction xact = fragMgr.beginTransaction();
 		xact.replace(resid, frag);
 		xact.addToBackStack(tag);
