@@ -102,6 +102,7 @@ public class HomeFragment extends HSFragmentParent {
 
 		mExpandableListView.setAdapter(mAdapter);
 		mExpandableListView.setOnChildClickListener(expandableChildViewClickListener);
+		mExpandableListView.setGroupIndicator(null);
 
 		// Search fragment
 		// Add search Menu
