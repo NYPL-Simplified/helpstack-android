@@ -67,7 +67,6 @@ public class HomeFragment extends HSFragmentParent {
 
 	private ExpandableListView mExpandableListView;
 	private LocalAdapter mAdapter;
-    private SearchFragment mSearchFragment;
 
 	private HSSource gearSource;
 	private HSKBItem[] fetchedKbArticles;
@@ -105,11 +104,8 @@ public class HomeFragment extends HSFragmentParent {
 		mExpandableListView.setOnChildClickListener(expandableChildViewClickListener);
 
 		// Search fragment
-		mSearchFragment = new SearchFragment();
-		HSFragmentManager.putFragmentInActivity(getHelpStackActivity(), R.id.search_container, mSearchFragment, "Search");
-		mSearchFragment.setOnReportAnIssueClickListener(reportAnIssueLisener);
 		// Add search Menu
-		setHasOptionsMenu(true);
+		setHasOptionsMenu(false);
 
 		// Initialize gear
 		gearSource = HSSource.getInstance(getActivity());
@@ -123,7 +119,6 @@ public class HomeFragment extends HSFragmentParent {
 			fetchedKbArticles = gson.fromJson(savedInstanceState.getString("kbArticles"), HSKBItem[].class);
 			fetchedTickets = gson.fromJson(savedInstanceState.getString("tickets"), HSTicket[].class);
 			numberOfServerCallWaiting = savedInstanceState.getInt("numberOfServerCallWaiting");
-			mSearchFragment.setKBArticleList(fetchedKbArticles);
 			if (numberOfServerCallWaiting > 0) { // To avoid error during orientation
 				initializeView(); // refreshing list from server
 			}
@@ -175,7 +170,6 @@ public class HomeFragment extends HSFragmentParent {
 
 		inflater.inflate(R.menu.hs_search_menu, menu);
 		MenuItem searchItem = menu.findItem(R.id.search);
-		mSearchFragment.addSearchViewInMenuItem(getActivity(), searchItem);
 	}
 	
 	@Override
@@ -192,7 +186,6 @@ public class HomeFragment extends HSFragmentParent {
 			@Override
 			public void onSuccess(Object[] kbArticles) {
 				fetchedKbArticles = (HSKBItem[]) kbArticles;
-				mSearchFragment.setKBArticleList(fetchedKbArticles);
 				refreshList();
 				startHomeScreenLoadingDisplay(false);
 			}
@@ -276,7 +269,6 @@ public class HomeFragment extends HSFragmentParent {
 
 		@Override
 		public void startReportAnIssue() {
-			mSearchFragment.setVisibility(false);
 			gearSource.launchCreateNewTicketScreen(HomeFragment.this, REQUEST_CODE_NEW_TICKET);
 		}
 	};
