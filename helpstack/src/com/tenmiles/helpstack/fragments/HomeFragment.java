@@ -95,9 +95,6 @@ public class HomeFragment extends HSFragmentParent {
         mExpandableListView.addFooterView(progress_bar_view);
 
 		// report an issue
-		View report_an_issue_view = inflater.inflate(R.layout.hs_expandable_footer_report_issue, null);
-		report_an_issue_view.findViewById(R.id.button1).setOnClickListener(reportIssueClickListener);
-		mExpandableListView.addFooterView(report_an_issue_view);
 		
 		if (HSHelpStack.getInstance(getActivity()).getShowCredits()) {
 			View show_credits_view = inflater.inflate(R.layout.hs_expandable_footer_powered_by_helpstack, null);

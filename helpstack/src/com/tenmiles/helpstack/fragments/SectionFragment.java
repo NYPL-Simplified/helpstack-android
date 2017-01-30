@@ -79,9 +79,6 @@ public class SectionFragment extends HSFragmentParent {
 		mListView = (ListView)rootView.findViewById(R.id.sectionlistview);
 		
 		// Report an issue
-		View report_an_issue_view = inflater.inflate(R.layout.hs_expandable_footer_report_issue, null);
-        report_an_issue_view.findViewById(R.id.button1).setOnClickListener(reportIssueClickListener);
-        mListView.addFooterView(report_an_issue_view);
 		
         mAdapter = new SectionAdapter(this.fetchedKbItems);
 		mListView.setAdapter(mAdapter);
