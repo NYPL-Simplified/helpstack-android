@@ -67,8 +67,9 @@ public class HSDeskGear extends HSGear {
     private String to_help_email;
     private String staff_login_email;
     private String staff_login_password;
+    private String brand_id;
 
-    public HSDeskGear(String instanceUrl, String to_help_email, String staff_login_email, String staff_login_password) {
+    public HSDeskGear(String instanceUrl, String to_help_email, String staff_login_email, String staff_login_password, String brand_id) {
         if (!instanceUrl.endsWith("/")) {
             instanceUrl = instanceUrl.concat("/");
         }
@@ -77,6 +78,7 @@ public class HSDeskGear extends HSGear {
         this.to_help_email = to_help_email;
         this.staff_login_email = staff_login_email;
         this.staff_login_password = staff_login_password;
+        this.brand_id = brand_id;
     }
 
     @Override
@@ -85,6 +87,11 @@ public class HSDeskGear extends HSGear {
 
         if (section == null) {
             String url = getApiUrl().concat("topics");
+
+            if (this.brand_id != null)
+            {
+                url = getApiUrl().concat(String.format("brands/%s/topics", this.brand_id));
+            }
 
             DeskJsonObjectRequest request = new DeskJsonObjectRequest(cancelTag, url, new DeskArrayBaseListener<JSONObject>(successListener, errorListener) {
 
