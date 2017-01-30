@@ -359,15 +359,12 @@ public class HomeFragment extends HSFragmentParent {
 			if (convertView == null) {
 				convertView = mLayoutInflater.inflate(R.layout.hs_expandable_parent_home_default, null);
 				holder = new ParentViewHolder();
-				holder.textView1 = (TextView) convertView.findViewById(R.id.textView1);
 				convertView.setTag(holder);
 			}
 			else {
 				holder = (ParentViewHolder) convertView.getTag();
 			}
 
-			String text = (String) getGroup(groupPosition);
-			holder.textView1.setText(text);
 			return convertView;
 		}
 
