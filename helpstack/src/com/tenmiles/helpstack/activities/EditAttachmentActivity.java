@@ -44,7 +44,7 @@ import android.widget.Toast;
 
 import com.tenmiles.helpstack.R;
 import com.tenmiles.helpstack.model.HSAttachment;
-import com.tenmiles.helpstack.theme.widget.DrawingView;
+import com.tenmiles.helpstack.widget.DrawingView;
 
 import java.io.FileNotFoundException;
 import java.util.UUID;
