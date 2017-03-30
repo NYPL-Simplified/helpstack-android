@@ -84,13 +84,12 @@ public class HSDeskGear extends HSGear {
         this.using_oauth = false;
     }
 
-    public HSDeskGear(String instanceUrl, String to_help_email, String oauth_sdk_token, String brand_id) {
+    public HSDeskGear(String instanceUrl, String oauth_sdk_token, String brand_id) {
         if (!instanceUrl.endsWith("/")) {
             instanceUrl = instanceUrl.concat("/");
         }
 
         this.instanceUrl = instanceUrl;
-        this.to_help_email = to_help_email;
         this.oauth_sdk_token = oauth_sdk_token;
         this.brand_id = brand_id;
         this.using_oauth = true;
