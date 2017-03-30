@@ -67,7 +67,9 @@ public class HSDeskGear extends HSGear {
     private String to_help_email;
     private String staff_login_email;
     private String staff_login_password;
+    private String oauth_sdk_token;
     private String brand_id;
+    private Boolean using_oauth;
 
     public HSDeskGear(String instanceUrl, String to_help_email, String staff_login_email, String staff_login_password, String brand_id) {
         if (!instanceUrl.endsWith("/")) {
@@ -79,6 +81,18 @@ public class HSDeskGear extends HSGear {
         this.staff_login_email = staff_login_email;
         this.staff_login_password = staff_login_password;
         this.brand_id = brand_id;
+        this.using_oauth = false;
+    }
+
+    public HSDeskGear(String instanceUrl, String oauth_sdk_token, String brand_id) {
+        if (!instanceUrl.endsWith("/")) {
+            instanceUrl = instanceUrl.concat("/");
+        }
+
+        this.instanceUrl = instanceUrl;
+        this.oauth_sdk_token = oauth_sdk_token;
+        this.brand_id = brand_id;
+        this.using_oauth = true;
     }
 
     @Override
@@ -665,7 +679,14 @@ public class HSDeskGear extends HSGear {
 
         private void addRequestParameters(String cancelTag) {
             this.setTag(cancelTag);
-            this.addCredential(staff_login_email, staff_login_password);
+
+            if (using_oauth) {
+                this.addCredential(oauth_sdk_token);
+            }
+            else {
+                this.addCredential(staff_login_email, staff_login_password);
+            }
+
             this.setRetryPolicy(new DefaultRetryPolicy(DeskJsonObjectRequest.TIMEOUT_MS,
                     DeskJsonObjectRequest.MAX_RETRIES, DeskJsonObjectRequest.BACKOFF_MULT));
         }
@@ -674,6 +695,10 @@ public class HSDeskGear extends HSGear {
             String credentials = name.concat(":").concat(password);
             String base64EncodedCredentials = Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
             headers.put("Authorization", "Basic ".concat(base64EncodedCredentials));
+        }
+
+        public void addCredential(String oauth_sdk_token) {
+            headers.put("Authorization", "Bearer ".concat(oauth_sdk_token));
         }
 
         @Override
