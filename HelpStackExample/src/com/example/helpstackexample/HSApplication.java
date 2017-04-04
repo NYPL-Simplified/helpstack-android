@@ -18,7 +18,7 @@ public class HSApplication extends Application {
 		helpStack = HSHelpStack.getInstance(this);
 
 		HSDeskGear deskGear =
-				new HSDeskGear("URL","email@email.com","email@email.com","password","brandId");
+				new HSDeskGear("URL","token","brand");
 		helpStack.setGear(deskGear);
 	}
 }
