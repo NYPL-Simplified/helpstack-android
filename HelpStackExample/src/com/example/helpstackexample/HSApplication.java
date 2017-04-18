@@ -5,7 +5,6 @@ import android.app.Application;
 import com.tenmiles.helpstack.HSHelpStack;
 import com.tenmiles.helpstack.gears.HSDeskGear;
 import com.tenmiles.helpstack.gears.HSEmailGear;
-import com.tenmiles.helpstack.gears.HSHappyfoxGear;
 
 public class HSApplication extends Application {
 
