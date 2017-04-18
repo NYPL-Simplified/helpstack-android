@@ -23,8 +23,8 @@
 package com.tenmiles.helpstack.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import android.app.ActionBar;
+import android.app.Activity;
 import android.view.Window;
 
 /**
@@ -33,7 +33,7 @@ import android.view.Window;
  * @author Nalin Chhajer
  *
  */
-public class HSActivityParent extends AppCompatActivity {
+public class HSActivityParent extends Activity {
 
     private static final String ACTION_BAR_TITLE = "Actionbar_title";
 	
@@ -45,9 +45,9 @@ public class HSActivityParent extends AppCompatActivity {
 		if (savedInstanceState != null) {
             getHelpStackActionBar().setTitle(savedInstanceState.getString(ACTION_BAR_TITLE));
 		}
-		getSupportActionBar().setHomeButtonEnabled(true);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		configureActionBar(getSupportActionBar());
+		getActionBar().setHomeButtonEnabled(true);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		configureActionBar(getActionBar());
 	}
 
 	public void configureActionBar(ActionBar actionBar) {
@@ -61,6 +61,6 @@ public class HSActivityParent extends AppCompatActivity {
 	}
 	
 	public ActionBar getHelpStackActionBar() {
-		return getSupportActionBar();
+		return getActionBar();
 	}
 }

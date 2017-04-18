@@ -27,7 +27,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.MenuItemCompat.OnActionExpandListener;
-import android.support.v7.widget.SearchView;
+import android.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -72,10 +72,7 @@ public class SearchFragment extends HSFragmentParent {
 		listView = (ListView)rootView.findViewById(R.id.searchList);
 		searchAdapter = new SearchAdapter(this.allKbArticles);
 		
-		View report_an_issue_view = inflater.inflate(R.layout.hs_expandable_footer_report_issue, null);
-        report_an_issue_view.findViewById(R.id.button1).setOnClickListener(reportIssueClickListener);
 
-        listView.addFooterView(report_an_issue_view);
         listView.setAdapter(searchAdapter);
         listView.setOnItemClickListener(listItemClickListener);
 		

@@ -1,4 +1,4 @@
-package com.tenmiles.helpstack.theme.widget;
+package com.tenmiles.helpstack.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;

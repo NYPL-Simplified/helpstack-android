@@ -67,7 +67,6 @@ public class HomeFragment extends HSFragmentParent {
 
 	private ExpandableListView mExpandableListView;
 	private LocalAdapter mAdapter;
-    private SearchFragment mSearchFragment;
 
 	private HSSource gearSource;
 	private HSKBItem[] fetchedKbArticles;
@@ -95,9 +94,6 @@ public class HomeFragment extends HSFragmentParent {
         mExpandableListView.addFooterView(progress_bar_view);
 
 		// report an issue
-		View report_an_issue_view = inflater.inflate(R.layout.hs_expandable_footer_report_issue, null);
-		report_an_issue_view.findViewById(R.id.button1).setOnClickListener(reportIssueClickListener);
-		mExpandableListView.addFooterView(report_an_issue_view);
 		
 		if (HSHelpStack.getInstance(getActivity()).getShowCredits()) {
 			View show_credits_view = inflater.inflate(R.layout.hs_expandable_footer_powered_by_helpstack, null);
@@ -106,13 +102,11 @@ public class HomeFragment extends HSFragmentParent {
 
 		mExpandableListView.setAdapter(mAdapter);
 		mExpandableListView.setOnChildClickListener(expandableChildViewClickListener);
+		mExpandableListView.setGroupIndicator(null);
 
 		// Search fragment
-		mSearchFragment = new SearchFragment();
-		HSFragmentManager.putFragmentInActivity(getHelpStackActivity(), R.id.search_container, mSearchFragment, "Search");
-		mSearchFragment.setOnReportAnIssueClickListener(reportAnIssueLisener);
 		// Add search Menu
-		setHasOptionsMenu(true);
+		setHasOptionsMenu(false);
 
 		// Initialize gear
 		gearSource = HSSource.getInstance(getActivity());
@@ -126,7 +120,6 @@ public class HomeFragment extends HSFragmentParent {
 			fetchedKbArticles = gson.fromJson(savedInstanceState.getString("kbArticles"), HSKBItem[].class);
 			fetchedTickets = gson.fromJson(savedInstanceState.getString("tickets"), HSTicket[].class);
 			numberOfServerCallWaiting = savedInstanceState.getInt("numberOfServerCallWaiting");
-			mSearchFragment.setKBArticleList(fetchedKbArticles);
 			if (numberOfServerCallWaiting > 0) { // To avoid error during orientation
 				initializeView(); // refreshing list from server
 			}
@@ -178,7 +171,6 @@ public class HomeFragment extends HSFragmentParent {
 
 		inflater.inflate(R.menu.hs_search_menu, menu);
 		MenuItem searchItem = menu.findItem(R.id.search);
-		mSearchFragment.addSearchViewInMenuItem(getActivity(), searchItem);
 	}
 	
 	@Override
@@ -195,7 +187,6 @@ public class HomeFragment extends HSFragmentParent {
 			@Override
 			public void onSuccess(Object[] kbArticles) {
 				fetchedKbArticles = (HSKBItem[]) kbArticles;
-				mSearchFragment.setKBArticleList(fetchedKbArticles);
 				refreshList();
 				startHomeScreenLoadingDisplay(false);
 			}
@@ -279,7 +270,6 @@ public class HomeFragment extends HSFragmentParent {
 
 		@Override
 		public void startReportAnIssue() {
-			mSearchFragment.setVisibility(false);
 			gearSource.launchCreateNewTicketScreen(HomeFragment.this, REQUEST_CODE_NEW_TICKET);
 		}
 	};
@@ -369,15 +359,12 @@ public class HomeFragment extends HSFragmentParent {
 			if (convertView == null) {
 				convertView = mLayoutInflater.inflate(R.layout.hs_expandable_parent_home_default, null);
 				holder = new ParentViewHolder();
-				holder.textView1 = (TextView) convertView.findViewById(R.id.textView1);
 				convertView.setTag(holder);
 			}
 			else {
 				holder = (ParentViewHolder) convertView.getTag();
 			}
 
-			String text = (String) getGroup(groupPosition);
-			holder.textView1.setText(text);
 			return convertView;
 		}
 

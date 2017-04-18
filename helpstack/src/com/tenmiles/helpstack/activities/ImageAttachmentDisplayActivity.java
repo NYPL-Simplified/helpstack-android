@@ -23,7 +23,7 @@
 package com.tenmiles.helpstack.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
+import android.app.ActionBar;
 import android.view.MenuItem;
 
 import com.tenmiles.helpstack.R;
@@ -43,9 +43,9 @@ public class ImageAttachmentDisplayActivity extends HSActivityParent {
 		if (savedInstanceState == null) {
 			String url = getIntent().getExtras().getString(EXTRAS_STRING_URL);
 			String title = getIntent().getExtras().getString(EXTRAS_TITLE);
-			getSupportActionBar().setTitle(title);
+			getActionBar().setTitle(title);
             ImageAttachmentDisplayFragment fragment = HSFragmentManager.getImageAttachmentDisplayFragment(this, url);
-            getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).commit();
+            getFragmentManager().beginTransaction().add(R.id.container, fragment).commit();
 		}
 	}
 	

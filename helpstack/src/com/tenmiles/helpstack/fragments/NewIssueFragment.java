@@ -204,7 +204,7 @@ public class NewIssueFragment extends HSFragmentParent {
             String formattedBody = getMessage();
 
             if(!gearSource.isNewUser()) {
-                getHelpStackActivity().setSupportProgressBarIndeterminateVisibility(true);
+                getHelpStackActivity().setProgressBarIndeterminateVisibility(true);
 
                 gearSource.createNewTicket("NEW_TICKET", userDetails, getSubject(), formattedBody, attachmentArray,
                         new OnNewTicketFetchedSuccessListener() {
@@ -212,7 +212,7 @@ public class NewIssueFragment extends HSFragmentParent {
                             @Override
                             public void onSuccess(HSUser udpatedUserDetail, HSTicket ticket) {
 
-                                getHelpStackActivity().setSupportProgressBarIndeterminateVisibility(false);
+                                getHelpStackActivity().setProgressBarIndeterminateVisibility(false);
                                 sendSuccessSignal(ticket);
                                 clearFormData();
                                 Toast.makeText(getActivity(), getResources().getString(R.string.hs_issue_created_raised), Toast.LENGTH_LONG).show();
@@ -223,7 +223,7 @@ public class NewIssueFragment extends HSFragmentParent {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 HSUtils.showAlertDialog(getActivity(), getResources().getString(R.string.hs_error_reporting_issue), getResources().getString(R.string.hs_error_check_network_connection));
-                                getHelpStackActivity().setSupportProgressBarIndeterminateVisibility(false);
+                                getHelpStackActivity().setProgressBarIndeterminateVisibility(false);
                             }
                         });
 

@@ -22,8 +22,8 @@
 
 package com.tenmiles.helpstack.fragments;
 
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
+import android.app.Fragment;
+import android.app.ActionBar;
 
 import com.tenmiles.helpstack.activities.HSActivityParent;
 
@@ -38,7 +38,7 @@ public class HSFragmentParent extends Fragment {
 
 	ActionBar getActionBar() {
 		HSActivityParent act = (HSActivityParent) getActivity();
-		return act.getSupportActionBar();
+		return act.getActionBar();
 	}
 	
 	public HSActivityParent getHelpStackActivity() {
